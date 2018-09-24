@@ -17,6 +17,8 @@ public class CloseTimeSlot extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	
 
@@ -51,20 +53,22 @@ public class CloseTimeSlot extends JDialog {
 			contentPanel.add(lblMeetingDuraton);
 		}
 		{
-			JComboBox comboBox_2 = new JComboBox();
-			comboBox_2.setBounds(226, 154, 130, 27);
-			contentPanel.add(comboBox_2);
-		}
-		{
 			textField = new JTextField();
 			textField.setBounds(226, 73, 130, 26);
 			contentPanel.add(textField);
 			textField.setColumns(10);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBounds(226, 114, 130, 27);
-			contentPanel.add(comboBox);
+			textField_1 = new JTextField();
+			textField_1.setBounds(226, 113, 130, 26);
+			contentPanel.add(textField_1);
+			textField_1.setColumns(10);
+		}
+		{
+			textField_2 = new JTextField();
+			textField_2.setBounds(226, 153, 130, 26);
+			contentPanel.add(textField_2);
+			textField_2.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();

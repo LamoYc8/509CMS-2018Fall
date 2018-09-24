@@ -17,6 +17,8 @@ public class CreateMeeting extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	
 
@@ -50,14 +52,18 @@ public class CreateMeeting extends JDialog {
 		textField.setBounds(226, 32, 130, 26);
 		contentPanel.add(textField);
 		textField.setColumns(10);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(226, 74, 130, 27);
-		contentPanel.add(comboBox);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(226, 114, 130, 27);
-		contentPanel.add(comboBox_1);
+		{
+			textField_1 = new JTextField();
+			textField_1.setBounds(226, 73, 130, 26);
+			contentPanel.add(textField_1);
+			textField_1.setColumns(10);
+		}
+		{
+			textField_2 = new JTextField();
+			textField_2.setBounds(226, 113, 130, 26);
+			contentPanel.add(textField_2);
+			textField_2.setColumns(10);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

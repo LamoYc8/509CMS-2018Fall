@@ -5,14 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CalendarModel implements Comparable<CalendarModel> {
-	String name;
-	String startDate;
-	String endDate;
-	//ArrayList<DateModel> dateList;
+	final String name;
+	private String startDate;
+	private String endDate;
 	ArrayList<Date> dateList;
 	ArrayList<TInterval> timeSlots;
+	ArrayList<Meeting> meetings;
 
 	final String startTime = "10:00";
     final String endTime = "17:00";
@@ -21,9 +22,9 @@ public class CalendarModel implements Comparable<CalendarModel> {
 	public CalendarModel(String name, String sDate, String eDate, int interval) throws ParseException {
 		//Give the name to the calendar
 		this.name = name;
+
 		this.startDate = sDate;
 		this.endDate = eDate;
-
 		//set up dateList based on the inputs of the user
 		//Eliminate all the weekdays
 		SimpleDateFormat dFormat = new SimpleDateFormat("MMM-d-yyyy");
@@ -73,9 +74,36 @@ public class CalendarModel implements Comparable<CalendarModel> {
 
 	}
 
-	public String toString() {
-		return "Calender: " + this.name + " starts from " + this.startDate + " ends at " + this.endDate;
+	//Modify the end date of the calendar
+	public void setDateList(String eDate) throws ParseException{
+		SimpleDateFormat dFormat = new SimpleDateFormat("MMM-d-yyyy");
+		Date startDate = dFormat.parse(this.startDate);
+		Date endDate = dFormat.parse(eDate);
+		this.dateList = new ArrayList<Date>();
+
+		Calendar tempStartDate = Calendar.getInstance();
+		tempStartDate.setTime(startDate);
+		Calendar tempEndDate = Calendar.getInstance();
+		tempEndDate.setTime(endDate);
+		tempEndDate.add(Calendar.DATE, +1); //Include the end date
+
+		while(tempStartDate.before(tempEndDate)){
+			if(tempStartDate.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && 
+			tempStartDate.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY ){
+				this.dateList.add(tempStartDate.getTime());
+				tempStartDate.add(Calendar.DAY_OF_YEAR, 1);
+			}else{
+				tempStartDate.add(Calendar.DAY_OF_YEAR, 1);
+
+			}
+		}
 	}
+
+	public String getName(){
+		return this.name;
+	}
+
+	
 	
 
 	@Override

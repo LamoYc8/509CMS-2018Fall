@@ -17,10 +17,13 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
 
 public class MeetingSchedule extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -75,21 +78,22 @@ public class MeetingSchedule extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Choose Month");
 		
-		JComboBox comboBox_1 = new JComboBox();
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
 		GroupLayout gl_mSchedule = new GroupLayout(mSchedule);
 		gl_mSchedule.setHorizontalGroup(
 			gl_mSchedule.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_mSchedule.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_mSchedule.createParallelGroup(Alignment.TRAILING, false)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+					.addGroup(gl_mSchedule.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_mSchedule.createSequentialGroup()
-							.addComponent(comboBox_1, 0, 110, Short.MAX_VALUE)
-							.addGap(6))
+							.addGap(30)
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_mSchedule.createSequentialGroup()
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+							.addGap(18)
+							.addComponent(textField_1, 0, 0, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		gl_mSchedule.setVerticalGroup(
 			gl_mSchedule.createParallelGroup(Alignment.LEADING)
@@ -99,7 +103,7 @@ public class MeetingSchedule extends JFrame {
 							.addGap(63)
 							.addComponent(lblNewLabel_1)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_mSchedule.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)))
@@ -117,29 +121,31 @@ public class MeetingSchedule extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Choose Date");
 		
-		JComboBox comboBox = new JComboBox();
+		textField = new JTextField();
+		textField.setColumns(10);
 		GroupLayout gl_dSchedule = new GroupLayout(dSchedule);
 		gl_dSchedule.setHorizontalGroup(
 			gl_dSchedule.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_dSchedule.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-					.addGap(12)
 					.addGroup(gl_dSchedule.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_dSchedule.createSequentialGroup()
-							.addGap(8)
-							.addComponent(lblNewLabel))
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
-					.addGap(1))
+							.addGap(18)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_dSchedule.createSequentialGroup()
+							.addGap(31)
+							.addComponent(lblNewLabel)))
+					.addContainerGap())
 		);
 		gl_dSchedule.setVerticalGroup(
 			gl_dSchedule.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_dSchedule.createSequentialGroup()
 					.addGap(45)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(190))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(197))
 				.addGroup(gl_dSchedule.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
