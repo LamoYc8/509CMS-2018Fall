@@ -84,7 +84,12 @@ public class SingleCalendar extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new SingleCalendarController(cmodel, SingleCalendar.this).closeTSProcess();
+				try {
+					new SingleCalendarController(cmodel, SingleCalendar.this).closeTSProcess();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 			

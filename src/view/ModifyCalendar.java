@@ -81,6 +81,7 @@ public class ModifyCalendar extends JDialog {
 
 		okButton = new JButton("OK");
 		okButton.setActionCommand("OK");
+		okButton.setEnabled(false);
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 

@@ -14,7 +14,7 @@ public class CalendarModel implements Comparable<CalendarModel> {
 	
 	public ArrayList<Date> dateList;
 	public ArrayList<TInterval> timeSlots;
-	public ArrayList<Meeting> meetings;
+	public ArrayList<Meeting> meetings = new ArrayList<Meeting>();
 
 	final String startTime = "10:00";
     final String endTime = "17:00";
@@ -75,6 +75,7 @@ public class CalendarModel implements Comparable<CalendarModel> {
 
 	}
 
+	
 	//Modify the end date of the calendar
 	public void modifyDateList(String newEndDate) throws ParseException{
 		this.endDate = newEndDate;
@@ -124,7 +125,10 @@ public class CalendarModel implements Comparable<CalendarModel> {
 		return this.meetings;
 	}
 	
-	
+	 public String toString() {
+	    	return name +" from " + startDate +" to " + endDate;
+	    }
+
 
 	
 	

@@ -98,7 +98,6 @@ public class CloseTimeSlot extends JDialog {
 
 		JButton okButton = new JButton("OK");
 		okButton.setActionCommand("OK");
-		okButton.setEnabled(false);
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 
@@ -134,5 +133,7 @@ public class CloseTimeSlot extends JDialog {
 				okButton.setEnabled(day.getText().length() > 0);
 			}
 		});
+
+		
 	}
 }
