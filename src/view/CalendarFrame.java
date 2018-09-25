@@ -70,17 +70,20 @@ public class CalendarFrame extends JFrame {
 
 		//Listener for buttons
 		createButton.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				//controller full in this place
 				try {
 					new FirstViewController(model, CalendarFrame.this).createProcess();
 				} catch (ParseException e1) {
 					
 					e1.printStackTrace();
 				}
+				
 			}
+			
 		});
-
+		
 		deleteButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				new FirstViewController(model, CalendarFrame.this).deleteProcess();

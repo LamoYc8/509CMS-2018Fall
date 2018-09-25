@@ -14,8 +14,8 @@ public class FirstViewController {
     Model model;
     CalendarFrame frame;
 
-    private JList<CalendarModel> list = frame.getCalendarList();
-    private int idx = list.getSelectedIndex();
+    private JList<? extends CalendarModel> list;
+    private int idx;
 
     public FirstViewController(Model m, CalendarFrame frame){
         this.model = m;
@@ -23,7 +23,9 @@ public class FirstViewController {
     }
 
     public void createProcess() throws ParseException {
-        
+
+        list = frame.getCalendarList();
+
         CreateCalendar ccview = new CreateCalendar();
         CalendarModel newCalendar;
 
@@ -38,6 +40,9 @@ public class FirstViewController {
             newCalendar = new CalendarModel(tempName, tempSD, tempED, tempInterval);
 
             model.add(newCalendar);
+            //further modify for all multiple calendars display in the JList;
+            DefaultListModel<CalendarModel> lm = (DefaultListModel<CalendarModel>) list.getModel();
+            lm.addElement(newCalendar);
 
         }
 
@@ -48,6 +53,10 @@ public class FirstViewController {
     }
     
     public void deleteProcess() {
+
+        list = frame.getCalendarList();
+        idx = list.getSelectedIndex();
+
     	if (idx < 0) {
             return;
         }
@@ -61,6 +70,9 @@ public class FirstViewController {
     }
 
     public void openProcess() {
+        list = frame.getCalendarList();
+        
+
         CalendarModel c = list.getSelectedValue();
         SingleCalendar scview = new SingleCalendar(c);
         scview.setVisible(true);
@@ -68,6 +80,9 @@ public class FirstViewController {
     }
 
     public void selectItemProcess() {
+
+        list = frame.getCalendarList();
+        idx = list.getSelectedIndex();
         frame.getdeleteBtn().setEnabled(idx >= 0);
         frame.getOpenBtn().setEnabled(idx >= 0);
     }

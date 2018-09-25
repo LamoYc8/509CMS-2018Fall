@@ -8,12 +8,13 @@ import java.util.Date;
 import java.util.List;
 
 public class CalendarModel implements Comparable<CalendarModel> {
-	final String name;
+	public final String name;
 	private String startDate;
 	private String endDate;
-	ArrayList<Date> dateList;
-	ArrayList<TInterval> timeSlots;
-	ArrayList<Meeting> meetings;
+	
+	public ArrayList<Date> dateList;
+	public ArrayList<TInterval> timeSlots;
+	public ArrayList<Meeting> meetings;
 
 	final String startTime = "10:00";
     final String endTime = "17:00";
@@ -27,7 +28,7 @@ public class CalendarModel implements Comparable<CalendarModel> {
 		this.endDate = eDate;
 		//set up dateList based on the inputs of the user
 		//Eliminate all the weekdays
-		SimpleDateFormat dFormat = new SimpleDateFormat("MMM-d-yyyy");
+		SimpleDateFormat dFormat = new SimpleDateFormat("MMM-dd-yyyy");
 		Date startDate = dFormat.parse(sDate);
 		Date endDate = dFormat.parse(eDate);
 		this.dateList = new ArrayList<Date>();
@@ -75,10 +76,11 @@ public class CalendarModel implements Comparable<CalendarModel> {
 	}
 
 	//Modify the end date of the calendar
-	public void setDateList(String eDate) throws ParseException{
+	public void modifyDateList(String newEndDate) throws ParseException{
+		this.endDate = newEndDate;
 		SimpleDateFormat dFormat = new SimpleDateFormat("MMM-d-yyyy");
 		Date startDate = dFormat.parse(this.startDate);
-		Date endDate = dFormat.parse(eDate);
+		Date endDate = dFormat.parse(this.endDate);
 		this.dateList = new ArrayList<Date>();
 
 		Calendar tempStartDate = Calendar.getInstance();
@@ -102,6 +104,27 @@ public class CalendarModel implements Comparable<CalendarModel> {
 	public String getName(){
 		return this.name;
 	}
+
+	public String getStartDate() {
+		return this.startDate;
+	}
+	public String getEndDate() {
+		return this.endDate;
+	}
+
+	public ArrayList<TInterval> getTInterval(){
+		return this.timeSlots;
+	}
+	
+	public ArrayList<Date> getDateList(){
+		return this.dateList;
+	}
+	
+	public ArrayList<Meeting> getMeetings(){
+		return this.meetings;
+	}
+	
+	
 
 	
 	

@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.SingleCalendarController;
 
@@ -19,6 +21,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import model.*;
+import javax.swing.JTextArea;
 
 public class SingleCalendar extends JFrame {
 
@@ -30,16 +33,19 @@ public class SingleCalendar extends JFrame {
 	JButton createMBtn;
 	JButton meetingSBtn;
 
-	JTable timeSlotTable;
-
 	CalendarModel cmodel;
+	private JTable timeSlotTable;
+
+	public JTable getTimeSlot() {
+		return this.timeSlotTable;
+	}
 	
 	/**
 	 * Create the frame.
 	 */
 	public SingleCalendar(CalendarModel cm) {
 		this.cmodel = cm;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 525, 302);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,10 +55,6 @@ public class SingleCalendar extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		//JTable content set up
-		timeSlotTable = new JTable();
-		scrollPane.setViewportView(timeSlotTable);
-		
 	 	modifyBtn = new JButton("Modify Calendar");
 		
 		closeTSBtn = new JButton("Close TimeSlot");
@@ -61,12 +63,17 @@ public class SingleCalendar extends JFrame {
 		
 		meetingSBtn = new JButton("Meeting Schedule");
 
-		//Listeners for all buttons
+		//Listeners for all buttons and current window
 		modifyBtn.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new SingleCalendarController(cmodel, SingleCalendar.this).modifyCProcess();
+				try {
+					new SingleCalendarController(cmodel, SingleCalendar.this).modifyCProcess();
+				} catch (ParseException e1) {
+					
+					e1.printStackTrace();
+				}
 				
 			}
 			
@@ -100,6 +107,7 @@ public class SingleCalendar extends JFrame {
 			
 		});
 
+		
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -141,7 +149,33 @@ public class SingleCalendar extends JFrame {
 					.addComponent(meetingSBtn)
 					.addGap(23))
 		);
-		contentPane.setLayout(gl_contentPane);
-	}
+		
 
+		Object[][] dataVector = new Object[cmodel.dateList.size()][cmodel.timeSlots.size()+1];
+		for (int i = 0; i < cmodel.dateList.size(); i++) {
+			for (int j = 0; j < dataVector[i].length; j++) {
+				if (j==0) {
+					dataVector[i][j] = cmodel.dateList.get(i).toString();
+				} else {
+					dataVector[i][j] = cmodel.timeSlots.get(j-1).startTime;
+				}
+			}
+
+		}
+		Object[] columnIdentifiers = new Object[cmodel.timeSlots.size()+1];
+		for (int i = 0; i < columnIdentifiers.length; i++) {
+			if (i ==0) {
+				columnIdentifiers[i] = "Date";
+			} else {
+				columnIdentifiers[i] = "Start Time";
+			}
+		}
+		DefaultTableModel dtm = new DefaultTableModel(dataVector, columnIdentifiers);
+
+		timeSlotTable = new JTable(dtm);
+		scrollPane.setViewportView(timeSlotTable);
+		contentPane.setLayout(gl_contentPane);
+
+
+	}
 }
