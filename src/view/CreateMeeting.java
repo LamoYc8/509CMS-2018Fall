@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JComboBox;
@@ -32,6 +33,11 @@ public class CreateMeeting extends JDialog {
 
 	CalendarModel cmodel;
 	boolean updated;
+
+	public boolean wasUpdated() {
+		return updated;
+	}
+
 	/**
 	 * Create the dialog.
 	 */
@@ -63,7 +69,8 @@ public class CreateMeeting extends JDialog {
 		
 		DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
 		for (Date date : cmodel.dateList) {
-			dcbm.addElement(date.toString());
+			SimpleDateFormat dFormat = new SimpleDateFormat("EEE, MMM-dd-yyyy");
+			dcbm.addElement(dFormat.format(date));
 		}
 		selectDate = new JComboBox<String>(dcbm);
 		selectDate.setBounds(226, 74, 130, 27);

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -152,10 +153,12 @@ public class SingleCalendar extends JFrame {
 		
 
 		Object[][] dataVector = new Object[cmodel.dateList.size()][cmodel.timeSlots.size()+1];
+		SimpleDateFormat dFormat = new SimpleDateFormat("EEE, MMM-dd-yyyy");
+	
 		for (int i = 0; i < cmodel.dateList.size(); i++) {
 			for (int j = 0; j < dataVector[i].length; j++) {
 				if (j==0) {
-					dataVector[i][j] = cmodel.dateList.get(i).toString();
+					dataVector[i][j] = dFormat.format(cmodel.dateList.get(i));
 				} else {
 					dataVector[i][j] = cmodel.timeSlots.get(j-1).startTime;
 				}

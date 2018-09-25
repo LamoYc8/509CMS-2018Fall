@@ -19,7 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -27,28 +29,18 @@ import javax.swing.JList;
 public class CloseTimeSlot extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField date;
-	private JTextField day;
-	private JComboBox<String> timeInterval;
+	public JTextField day;
+	public JComboBox<String> selectDate, timeInterval;
 
 	CalendarModel cmodel;
 	boolean updated;
-
-	public JTextField getChosenDate() {
-		return date;
+	
+	public boolean wasUpdated() {
+		return updated;
 	}
 
-	public JTextField getChosenDay() {
-		return day;
-	}
 
-	public JComboBox<String> getChosenTS() {
-		return timeInterval;
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
 	public CloseTimeSlot(CalendarModel cm) {
 		this.cmodel = cm;
 		setBounds(100, 100, 450, 300);
@@ -62,7 +54,7 @@ public class CloseTimeSlot extends JDialog {
 		lblName.setBounds(28, 30, 109, 16);
 		contentPanel.add(lblName);
 
-		JLabel lblStartDate = new JLabel("Enter Date:");
+		JLabel lblStartDate = new JLabel("Select Date:");
 		lblStartDate.setBounds(71, 78, 97, 16);
 		contentPanel.add(lblStartDate);
 
@@ -73,11 +65,6 @@ public class CloseTimeSlot extends JDialog {
 		JLabel lblMeetingDuraton = new JLabel("TimeSlot");
 		lblMeetingDuraton.setBounds(71, 158, 86, 16);
 		contentPanel.add(lblMeetingDuraton);
-
-		date = new JTextField();
-		date.setBounds(226, 73, 130, 26);
-		contentPanel.add(date);
-		date.setColumns(10);
 
 		day = new JTextField();
 		day.setBounds(226, 113, 130, 26);
@@ -94,6 +81,16 @@ public class CloseTimeSlot extends JDialog {
 		timeInterval.setBounds(226, 154, 130, 27);
 		timeInterval.setSelectedItem(null);
 		contentPanel.add(timeInterval);
+		
+		DefaultComboBoxModel<String> dcbm_1 = new DefaultComboBoxModel<String>();
+		for (Date date : cmodel.dateList) {
+			SimpleDateFormat dFormat = new SimpleDateFormat("EEE, MMM-dd-yyyy");
+			dcbm_1.addElement(dFormat.format(date));
+		}
+		selectDate = new JComboBox<String>(dcbm_1);
+		selectDate.setBounds(226, 74, 130, 27);
+		selectDate.setSelectedItem(null);
+		contentPanel.add(selectDate);
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -130,12 +127,6 @@ public class CloseTimeSlot extends JDialog {
 				
 			}
 			
-		});
-		
-		date.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				okButton.setEnabled(date.getText().length() > 0);
-			}
 		});
 
 		day.addKeyListener(new KeyAdapter(){

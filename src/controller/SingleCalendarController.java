@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,11 +23,12 @@ public class SingleCalendarController {
     }
 
     public static Object[][] setDataVector(CalendarModel c) {
+        SimpleDateFormat dFormat = new SimpleDateFormat("EEE, MMM-dd-yyyy");
         Object[][] dataVector = new Object[c.dateList.size()][c.timeSlots.size()+1];
 		for (int i = 0; i < c.dateList.size(); i++) {
 			for (int j = 0; j < dataVector[i].length; j++) {
 				if (j==0) {
-					dataVector[i][j] = c.dateList.get(i).toString();
+					dataVector[i][j] = dFormat.format(c.dateList.get(i));
 				} else {
 					dataVector[i][j] = c.timeSlots.get(j-1).startTime;
 				}
@@ -81,6 +83,8 @@ public class SingleCalendarController {
         CloseTimeSlot ctsview = new CloseTimeSlot(this.cmodel);
         ctsview.setModal(true);
         ctsview.setVisible(true);
+
+
 
     }
 
