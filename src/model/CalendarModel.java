@@ -1,13 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-public class CalendarModel implements Comparable<CalendarModel> {
+public class CalendarModel implements Comparable<CalendarModel>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final String name;
 	private String startDate;
 	private String endDate;
@@ -126,7 +130,7 @@ public class CalendarModel implements Comparable<CalendarModel> {
 	}
 	
 	 public String toString() {
-	    	return name +" from " + startDate +" to " + endDate;
+	    	return "Calendar: " + name +" from " + startDate +" to " + endDate;
 	    }
 
 

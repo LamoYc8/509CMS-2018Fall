@@ -42,7 +42,11 @@ public class FirstViewController {
             model.add(newCalendar);
             //further modify for all multiple calendars display in the JList;
             DefaultListModel<CalendarModel> lm = (DefaultListModel<CalendarModel>) list.getModel();
-            lm.addElement(newCalendar);
+            lm.removeAllElements();
+            for (CalendarModel cmodel : model.getArray()) {
+                lm.addElement(cmodel);
+                
+            }
 
         }
 
